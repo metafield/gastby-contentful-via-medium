@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Img from "gatsby-image"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -15,6 +16,7 @@ class BlogPostContentfulTemplate extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title={post.title} description={post.subtitle} />
+        <Img fluid={post.image.fluid} />
         <h1
           style={{
             marginTop: rhythm(1),
@@ -88,6 +90,11 @@ export const pageQuery = graphql`
       subtitle
       author
       createdAt
+      image {
+        fluid {
+          ...GatsbyContentfulFluid
+        }
+      }
       content {
         childContentfulRichText {
           html
